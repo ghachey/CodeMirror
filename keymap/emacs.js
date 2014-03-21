@@ -149,7 +149,11 @@
   }
 
   function killTo(cm, by, dir) {
-    kill(cm, cm.getCursor(), findEnd(cm, by, dir), true);
+		if (dir==-1) {
+			kill(cm, findEnd(cm, by, dir), cm.getCursor(), true);
+		} else {
+			kill(cm, cm.getCursor(), findEnd(cm, by, dir), true);
+		}
   }
 
   function addPrefix(cm, digit) {
@@ -285,8 +289,8 @@
 
     "Alt-F": move(byWord, 1), "Alt-B": move(byWord, -1),
     "Ctrl-Right": move(byWord, 1), "Ctrl-Left": move(byWord, -1),
-    "Alt-D": function(cm) { killTo(cm, byWord, 1); },
-    "Alt-Backspace": function(cm) { killTo(cm, byWord, -1); },
+		"Alt-D": function(cm) { killTo(cm, byWord, 1); },
+		"Alt-Backspace": function(cm) { killTo(cm, byWord, -1); },
 
     "Ctrl-N": move(byLine, 1), "Ctrl-P": move(byLine, -1),
     "Down": move(byLine, 1), "Up": move(byLine, -1),
