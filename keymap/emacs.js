@@ -271,7 +271,6 @@
     "Ctrl-Y": function(cm) {
       var start = cm.getCursor();
       cm.replaceRange(getFromRing(getPrefix(cm)), start, start, "paste");
-      cm.setSelection(start, cm.getCursor());
     },
     "Alt-Y": function(cm) {cm.replaceSelection(popFromRing(), "around", "paste");},
 
@@ -285,6 +284,7 @@
     "Backspace": function(cm) { killTo(cm, byChar, -1); },
 
     "Alt-F": move(byWord, 1), "Alt-B": move(byWord, -1),
+    "Ctrl-Right": move(byWord, 1), "Ctrl-Left": move(byWord, -1),
     "Alt-D": function(cm) { killTo(cm, byWord, 1); },
     "Alt-Backspace": function(cm) { killTo(cm, byWord, -1); },
 
