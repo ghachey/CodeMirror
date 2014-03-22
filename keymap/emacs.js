@@ -148,6 +148,14 @@
     return f;
   }
 
+	function remove(by, dir) {
+		var f = function(cm) {
+			cm.replaceRange("", cm.getCursor(), findEnd(cm, by, dir));
+			console.log("by: ", by);
+		};
+		return f;
+	}
+
   function killTo(cm, by, dir) {
 		if (dir==-1) {
 			kill(cm, findEnd(cm, by, dir), cm.getCursor(), true);
@@ -282,9 +290,9 @@
 
     "Ctrl-F": move(byChar, 1), "Ctrl-B": move(byChar, -1),
     "Right": move(byChar, 1), "Left": move(byChar, -1),
-    "Ctrl-D": function(cm) { killTo(cm, byChar, 1); },
-		"Delete": function(cm) { killTo(cm, byChar, 1); },
-    "Backspace": function(cm) { killTo(cm, byChar, -1); },
+    "Ctrl-D": remove(byChar, 1),
+		"Delete": remove(byChar, 1),
+    "Backspace": remove(byChar, -1),
 
     "Alt-F": move(byWord, 1), "Alt-B": move(byWord, -1),
     "Ctrl-Right": move(byWord, 1), "Ctrl-Left": move(byWord, -1),
